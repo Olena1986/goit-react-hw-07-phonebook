@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormStyle } from './ContactForm.styled';
+import { useDispatch } from 'react-redux';
+import { addContactThunk } from 'Redux/operations';
 
 
-const ContactForm = ({ handleAddContact }) => {
+const ContactForm = () => {
+   const dispatch = useDispatch();
   
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -14,8 +17,7 @@ const ContactForm = ({ handleAddContact }) => {
     if (name.trim() === '' || number.trim() === '') {
       return;
     }
-
-    handleAddContact({ name, number });
+dispatch(addContactThunk({ name, number }));
 
     setName('');
     setNumber('');

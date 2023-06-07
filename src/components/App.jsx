@@ -5,12 +5,13 @@ import { AppStyle } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
-import { addContact, updateFilter } from 'Redux/contactsSlice.js';
+import { addContactThunk} from 'Redux/operations.js';
+import { updateFilter } from 'Redux/contactsSlice';
 
 const App = () => {
   const dispatch = useDispatch();
- const contacts = useSelector(state => state.contacts.contacts);
-const filter = useSelector(state => state.contacts.filter);
+ const contacts = useSelector(state => state.contacts.items);
+const filter = useSelector(state => state.filter);
 
  const handleAddContact = ({ name, number }) => {
     const existingContact = contacts.find(
@@ -22,7 +23,7 @@ const filter = useSelector(state => state.contacts.filter);
       return;
     }
 
-    dispatch(addContact({ name, number, id: nanoid() }));
+    dispatch(addContactThunk({ name, number, id: nanoid() }));
   };
 
 
