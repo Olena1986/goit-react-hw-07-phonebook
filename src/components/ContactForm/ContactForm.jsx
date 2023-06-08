@@ -23,11 +23,14 @@ const ContactForm = () => {
       (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
 
-    if (existingContact) {
-      return alert (`${name} is already in contacts.`);
-     
+  if (existingContact) {
+    alert(`${name} is already in contacts.`);
+    setName('');
+    setNumber('');
+    return;
     }
-dispatch(addContactThunk({ name, number, id:nanoid() }));
+    
+   dispatch(addContactThunk({ name, number, id:nanoid() }));
 
     setName('');
     setNumber('');
