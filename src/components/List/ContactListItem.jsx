@@ -9,7 +9,7 @@ const ContactListItem = ({ contact }) => {
 
   return (
     <ContactItemStyle.Item>
-      {contact.name}
+      {contact.name}: {contact.number}
       <ContactItemStyle.Button onClick={()=> dispatch(deleteContactThunk(contact.id))}>Delete</ContactItemStyle.Button>
     </ContactItemStyle.Item>
   );

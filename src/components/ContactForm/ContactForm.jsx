@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FormStyle } from './ContactForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContactThunk } from 'Redux/operations';
 
 
 const ContactForm = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts.items);
   
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -16,6 +16,15 @@ const ContactForm = () => {
 
     if (name.trim() === '' || number.trim() === '') {
       return;
+    }
+
+    const existingContact = contacts.find(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (existingContact) {
+      return alert (`${name} is already in contacts.`);
+     
     }
 dispatch(addContactThunk({ name, number }));
 
@@ -55,9 +64,6 @@ dispatch(addContactThunk({ name, number }));
   );
 };
 
-ContactForm.propTypes = {
-  handleAddContact: PropTypes.func,
-};
 
 export default ContactForm;
 
