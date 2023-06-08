@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FormStyle } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactThunk } from 'Redux/operations';
+import { nanoid } from '@reduxjs/toolkit';
 
 
 const ContactForm = () => {
@@ -26,7 +27,7 @@ const ContactForm = () => {
       return alert (`${name} is already in contacts.`);
      
     }
-dispatch(addContactThunk({ name, number }));
+dispatch(addContactThunk({ name, number, id:nanoid() }));
 
     setName('');
     setNumber('');
